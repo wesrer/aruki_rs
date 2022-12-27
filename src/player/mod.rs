@@ -1,5 +1,6 @@
 use std::fmt::{Display, Formatter};
 
+#[derive(Debug, Copy, Clone, PartialEq)]
 pub enum Player {
     White,
     Black,

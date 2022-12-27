@@ -2,11 +2,12 @@ use std::fmt::Display;
 
 use enum_display_derive::Display;
 
-use super::king::King;
+use super::{king::King, minister::Minister};
 
 #[derive(Display)]
 pub enum Pieces {
     King(King),
+    Minister(Minister),
     // Jester,
     // Arrow
     // Lance,
@@ -18,7 +19,6 @@ pub enum Pieces {
     // Sword,
     // LongSword,
     // Pawn,
-    // Minister,
     // Javelin,
     // Rook
 }
@@ -27,6 +27,10 @@ impl Pieces {
     pub fn king() -> Self {
         Self::King(King {})
     }
+
+    pub fn minister() -> Self {
+        Self::Minister(Minister {})
+    }
 }
 
 impl TryFrom<&str> for Pieces {
@@ -34,7 +38,8 @@ impl TryFrom<&str> for Pieces {
 
     fn try_from(value: &str) -> Result<Self, Self::Error> {
         match value {
-            "k" | "K" => Ok(Pieces::King(King {})),
+            "k" | "K" => Ok(Self::king()),
+            "m" | "M" => Ok(Self::minister()),
             _ => Err("invalid character"),
         }
     }
