@@ -18,12 +18,31 @@ impl Moves for Javelin {
         let row = pos.0;
         let col = pos.1;
 
-        let mut valid_moves = vec![
-            Position(row + 1, col), // one forward
-            Position(row + 2, col), // two forward
-            Position(row - 1, col), // one backward
-            Position(row - 2, col), // two backward
-        ];
+        let player_color = board.player_color(pos);
+
+        let mut valid_moves = vec![];
+
+        let temp_pos = Position(row + 1, col);
+
+        if board.player_color(temp_pos) != player_color {
+            valid_moves.push(temp_pos);
+
+            let temp_pos = Position(row + 2, col);
+            if board.player_color(temp_pos) != player_color {
+                valid_moves.push(temp_pos);
+            }
+        }
+
+        let temp_pos = Position(row - 1, col);
+
+        if board.player_color(temp_pos) != player_color {
+            valid_moves.push(temp_pos);
+
+            let temp_pos = Position(row - 2, col);
+            if board.player_color(temp_pos) != player_color {
+                valid_moves.push(temp_pos);
+            }
+        }
 
         valid_moves.retain(Board::within_board);
         valid_moves.retain(|x| board.player_color(*x) != board.player_color(pos));

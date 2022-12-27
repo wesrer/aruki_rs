@@ -27,12 +27,12 @@ fn test_render_normal_move() {
     let king_piece = PlayerPiece::new('w'.try_into().unwrap(), "k".try_into().unwrap());
     let king_move = Moves::Move {
         piece: king_piece,
-        starting: Position(0, 0),
-        ending: Position(1, 0),
+        starting: Position(10, 0),
+        ending: Position(11, 0),
         captured: None,
     };
 
-    assert_eq!(format!("{}", king_move), "K(a1)a2");
+    assert_eq!(format!("{}", king_move), "K(a11)a12");
 }
 
 #[test]
@@ -45,14 +45,18 @@ fn test_render_capture_move() {
         captured: Some(Pieces::pawn()),
     };
 
-    assert_eq!(format!("{}", king_move), "K(a1)xP(a2)");
+    assert_eq!(format!("{}", king_move), "K(a1)xO(a2)");
 }
 
 #[test]
 fn test_render_evolution_move() {
-    let pawn_piece = PlayerPiece::new('w'.try_into().unwrap(), "p".try_into().unwrap());
-    let pawn_evolve = Moves::Evolution { piece: pawn_piece, starting: Position(1,1), ally_piece: Pieces::pawn(), ending_piece: Pieces::javelin() };
+    let pawn_piece = PlayerPiece::new('w'.try_into().unwrap(), "o".try_into().unwrap());
+    let pawn_evolve = Moves::Evolution {
+        piece: pawn_piece,
+        starting: Position(1, 0),
+        ally_piece: Pieces::pawn(),
+        ending_piece: Pieces::javelin(),
+    };
 
-    assert_eq!(format!("{}", pawn_evolve), "P(a2)+P=J");
-
+    assert_eq!(format!("{}", pawn_evolve), "O(a2)+O=J");
 }

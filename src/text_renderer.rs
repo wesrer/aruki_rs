@@ -40,8 +40,17 @@ impl Display for Moves {
                 Some(x) => write!(f, "{}({})x{}({})", piece.piece_type, starting, x, ending),
                 None => write!(f, "{}({}){}", piece.piece_type, starting, ending),
             },
-            Self::Evolution { piece, starting, ally_piece, ending_piece } => {
-                write!(f, "{}({})+{}={}", piece.piece_type, starting, ally_piece, ending_piece)
+            Self::Evolution {
+                piece,
+                starting,
+                ally_piece,
+                ending_piece,
+            } => {
+                write!(
+                    f,
+                    "{}({})+{}={}",
+                    piece.piece_type, starting, ally_piece, ending_piece
+                )
             }
             _ => unimplemented!(),
         }
@@ -64,6 +73,6 @@ impl Display for Javelin {
 
 impl Display for Pawn {
     fn fmt(&self, f: &mut Formatter) -> FmtResult {
-        write!(f, "P")
+        write!(f, "O")
     }
 }

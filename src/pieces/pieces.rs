@@ -10,14 +10,14 @@ pub enum Pieces {
     Minister(Minister),
     // Jester,
     Arrow,
-    // Lance,
-    // GreaterLance,
+    Lance,
+    GreaterLance,
     // GreaterRiver,
     // LesserRiver,
-    // Pike,
-    // GreaterPike,
-    // Sword,
-    // LongSword,
+    Pike,
+    GreaterPike,
+    Sword,
+    LongSword,
     Pawn(Pawn),
     Javelin(Javelin),
     Rook,
@@ -42,11 +42,51 @@ impl Pieces {
         Self::Pawn(Pawn {})
     }
 
+    pub fn arrow() -> Self {
+        Self::Arrow
+    }
+
+    pub fn rook() -> Self {
+        Self::Rook
+    }
+
+    pub fn pike() -> Self {
+        Self::Pike
+    }
+
+    pub fn greater_pike() -> Self {
+        Self::GreaterPike
+    }
+
+    pub fn greater_lance() -> Self {
+        Self::GreaterLance
+    }
+
+    pub fn lance() -> Self {
+        Self::Lance
+    }
+
+    pub fn sword() -> Self {
+        Self::Sword
+    }
+
+    pub fn longsword() -> Self {
+        Self::LongSword
+    }
+
+    // NOTE: returns the first piece if no evolution is viable
     pub fn evolve(pieces: (Self, Self)) -> Self {
         match pieces {
             (Self::Pawn(_), Self::Pawn(_)) => Self::javelin(),
             (Self::Rook, Self::Arrow) => Self::minister(),
-            _ => unimplemented!(),
+            (Self::Arrow, Self::Rook) => Self::minister(),
+            (Self::Pike, Self::Pike) => Self::greater_pike(),
+            (Self::Lance, Self::Pike) => Self::sword(),
+            (Self::Pike, Self::Lance) => Self::sword(),
+            (Self::Sword, Self::Sword) => Self::longsword(),
+            (Self::GreaterLance, Self::GreaterPike) => Self::longsword(),
+            (Self::GreaterPike, Self::GreaterLance) => Self::longsword(),
+            _ => pieces.0,
         }
     }
 }
@@ -58,7 +98,16 @@ impl TryFrom<&str> for Pieces {
         match value {
             "k" | "K" => Ok(Self::king()),
             "m" | "M" => Ok(Self::minister()),
-            "p" | "P" => Ok(Self::pawn()),
+            "a" | "A" => Ok(Self::arrow()),
+            "r" | "R" => Ok(Self::rook()),
+            "j" | "J" => Ok(Self::javelin()),
+            "o" | "O" => Ok(Self::pawn()),
+            "p" | "P" => Ok(Self::pike()),
+            "gp" | "GP" => Ok(Self::greater_pike()),
+            "l" | "L" => Ok(Self::lance()),
+            "gl" | "GL" => Ok(Self::greater_lance()),
+            "s" | "S" => Ok(Self::sword()),
+            "ls" | "LS" => Ok(Self::longsword()),
             _ => Err("invalid character"),
         }
     }
