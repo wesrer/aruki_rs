@@ -9,7 +9,7 @@ pub mod minister;
 
 pub struct Piece {
     pub player: Player,
-    piece_type: Pieces,
+    pub piece_type: Pieces,
 }
 
 impl Piece {

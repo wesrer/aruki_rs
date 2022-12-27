@@ -34,12 +34,18 @@ impl Board {
 
 pub trait GameState {
     fn player_color(&self, pos: (u8, u8)) -> Option<Player>;
+    fn player_piece(&self, pos: (u8, u8)) -> Option<Pieces>;
 }
 
 impl GameState for Board {
     fn player_color(&self, (row, col): (u8, u8)) -> Option<Player> {
         let piece = self.live_board[row as usize][col as usize].as_ref()?;
         Some(piece.player)
+    }
+
+    fn player_piece(&self, (row, col): (u8, u8)) -> Option<Pieces> {
+        let piece = self.live_board[row as usize][col as usize].as_ref()?;
+        Some(piece.piece_type)
     }
 } 
 

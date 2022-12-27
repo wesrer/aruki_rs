@@ -4,7 +4,7 @@ use enum_display_derive::Display;
 
 use super::{king::King, minister::Minister};
 
-#[derive(Display)]
+#[derive(Display, Clone, Copy)]
 pub enum Pieces {
     King(King),
     Minister(Minister),
@@ -52,3 +52,4 @@ impl TryFrom<String> for Pieces {
         value.as_str().try_into()
     }
 }
+
