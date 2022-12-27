@@ -1,6 +1,9 @@
 use std::fmt::{Display, Formatter, Result as FmtResult};
 
-use crate::{board::{Board, GameState}, moves::Position};
+use crate::{
+    board::{Board, GameState},
+    moves::Position,
+};
 
 use super::{pieces::Pieces, Moves};
 
@@ -21,9 +24,9 @@ impl Moves for King {
 
         let mut valid_moves = vec![
             Position(row + 1, col),     // directly forward
-            Position(row - 1, col),     // directly backward (pos.0, pos.1 + 1),     // directly to the right
-            Position(row, col - 1),     // directly to the left
-            Position(row, col + 1),     // directly to the right
+            Position(row - 1, col), // directly backward (pos.0, pos.1 + 1),     // directly to the right
+            Position(row, col - 1), // directly to the left
+            Position(row, col + 1), // directly to the right
             Position(row + 1, col + 1), // diagonally right, up
             Position(row + 1, col - 1), // diagnoally left, up
             Position(row - 1, col + 1), // diagonally right, down

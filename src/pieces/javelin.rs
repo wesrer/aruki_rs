@@ -1,4 +1,7 @@
-use crate::{board::{Board, GameState}, moves::Position};
+use crate::{
+    board::{Board, GameState},
+    moves::Position,
+};
 
 use super::{pieces::Pieces, Moves};
 

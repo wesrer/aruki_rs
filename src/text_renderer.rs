@@ -3,7 +3,8 @@ use std::fmt::{write, Display, Formatter, Result as FmtResult};
 use crate::{
     moves::{Moves, Position},
     pieces::{javelin::Javelin, king::King, pawn::Pawn},
-    player::Player, COL_CHARS,
+    player::Player,
+    COL_CHARS,
 };
 
 impl Display for Player {
@@ -23,18 +24,24 @@ impl Display for Position {
         let row = self.0 + 1; // shift index so that players don't have to deal with 0 indexed moves
         let col = self.1;
 
-        write!(f, "{}{}", row, letters.nth(col as usize).unwrap())
+        write!(f, "{}{}", letters.nth(col as usize).unwrap(), row)
     }
 }
 
 impl Display for Moves {
     fn fmt(&self, f: &mut Formatter<'_>) -> FmtResult {
         match self {
-                Self::Move { piece, starting, ending, captured } => {
-                    match captured {
-                        Some(x) => write!(f, "{}({})x{}({})", piece.piece_type, starting, x, ending),
-                        None => write!(f, "{}({}){}", piece.piece_type, starting, ending)
-                    }
+            Self::Move {
+                piece,
+                starting,
+                ending,
+                captured,
+            } => match captured {
+                Some(x) => write!(f, "{}({})x{}({})", piece.piece_type, starting, x, ending),
+                None => write!(f, "{}({}){}", piece.piece_type, starting, ending),
+            },
+            Self::Evolution { piece, starting, ally_piece, ending_piece } => {
+                write!(f, "{}({})+{}={}", piece.piece_type, starting, ally_piece, ending_piece)
             }
             _ => unimplemented!(),
         }

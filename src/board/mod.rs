@@ -1,7 +1,4 @@
-use crate::{
-    pieces::{pieces::Pieces},
-    player::Player, moves::Position, player_piece::PlayerPiece,
-};
+use crate::{moves::Position, pieces::pieces::Pieces, player::Player, player_piece::PlayerPiece};
 
 pub type Square = Option<PlayerPiece>;
 
