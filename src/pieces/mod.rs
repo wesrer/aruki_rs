@@ -1,32 +1,14 @@
-use crate::{player::Player, board::{GameState, Board}};
-use std::fmt::{Display, Formatter, Result as FmtResult};
+use crate::{board::Board, moves::Position};
 
-use self::pieces::Pieces;
-
-pub mod pieces;
+pub mod javelin;
 pub mod king;
 pub mod minister;
+pub mod pawn;
+pub mod pieces;
 
-pub struct Piece {
-    pub player: Player,
-    pub piece_type: Pieces,
-}
-
-impl Piece {
-    pub fn new(player: Player, piece_type: Pieces) -> Self {
-        Self { player, piece_type }
-    }
-}
-
-impl Display for Piece {
-    fn fmt(&self, f: &mut Formatter) -> FmtResult {
-        write!(f, "{}_{}", self.player, self.piece_type)
-    }
-}
-
-pub trait Moves { 
-    fn moves(pos: (u8, u8), board: Board) -> Vec<(u8, u8)>;
-    fn is_valid_move(pos: (u8, u8), mov: (u8, u8), board: Board) -> bool {
+pub trait Moves {
+    fn moves(pos: Position, board: Board) -> Vec<Position>;
+    fn is_valid_move(pos: Position, mov: Position, board: Board) -> bool {
         Self::moves(pos, board).contains(&mov)
     }
 }

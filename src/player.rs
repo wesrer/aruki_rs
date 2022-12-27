@@ -6,6 +6,8 @@ pub enum Player {
     Black,
 }
 
+// trait implementations
+
 impl TryFrom<u8> for Player {
     type Error = &'static str;
 
@@ -37,15 +39,5 @@ impl TryFrom<char> for Player {
             'b' | 'B' => Ok(Self::Black),
             _ => Err("invalid character"),
         }
-    }
-}
-
-impl Display for Player {
-    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
-        let letter = match self {
-            Self::White => 'W',
-            Self::Black => 'B',
-        };
-        write!(f, "{}", letter)
     }
 }
