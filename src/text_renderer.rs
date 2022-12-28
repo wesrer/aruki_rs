@@ -2,7 +2,10 @@ use std::fmt::{Display, Formatter, Result as FmtResult};
 
 use crate::{
     moves::{Position, PossibleMoves},
-    pieces::{javelin::Javelin, king::King, pawn::Pawn, rook::Rook},
+    pieces::{
+        javelin::Javelin, king::King, lance::Lance, pawn::Pawn, pike::Pike, rook::Rook,
+        sword::Sword,
+    },
     player::Player,
     player_piece::PlayerPiece,
     COL_CHARS,
@@ -87,5 +90,23 @@ impl Display for Rook {
 impl Display for Pawn {
     fn fmt(&self, f: &mut Formatter) -> FmtResult {
         write!(f, "O")
+    }
+}
+
+impl Display for Pike {
+    fn fmt(&self, f: &mut Formatter) -> FmtResult {
+        write!(f, "P")
+    }
+}
+
+impl Display for Lance {
+    fn fmt(&self, f: &mut Formatter) -> FmtResult {
+        write!(f, "L")
+    }
+}
+
+impl Display for Sword {
+    fn fmt(&self, f: &mut Formatter) -> FmtResult {
+        write!(f, "S")
     }
 }

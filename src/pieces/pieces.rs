@@ -2,7 +2,10 @@ use std::fmt::Display;
 
 use enum_display_derive::Display;
 
-use super::{javelin::Javelin, king::King, minister::Minister, pawn::Pawn, rook::Rook};
+use super::{
+    javelin::Javelin, king::King, lance::Lance, minister::Minister, pawn::Pawn, pike::Pike,
+    rook::Rook, sword::Sword,
+};
 
 #[derive(Display, Clone, Copy, PartialEq)]
 pub enum Pieces {
@@ -10,13 +13,13 @@ pub enum Pieces {
     Minister(Minister),
     // Jester,
     Arrow,
-    Lance,
+    Lance(Lance),
     GreaterLance,
     // GreaterRiver,
     // LesserRiver,
-    Pike,
+    Pike(Pike),
     GreaterPike,
-    Sword,
+    Sword(Sword),
     LongSword,
     Pawn(Pawn),
     Javelin(Javelin),
@@ -51,7 +54,7 @@ impl Pieces {
     }
 
     pub fn pike() -> Self {
-        Self::Pike
+        Self::Pike(Pike {})
     }
 
     pub fn greater_pike() -> Self {
@@ -63,11 +66,11 @@ impl Pieces {
     }
 
     pub fn lance() -> Self {
-        Self::Lance
+        Self::Lance(Lance {})
     }
 
     pub fn sword() -> Self {
-        Self::Sword
+        Self::Sword(Sword {})
     }
 
     pub fn longsword() -> Self {
@@ -80,10 +83,10 @@ impl Pieces {
             (Self::Pawn(_), Self::Pawn(_)) => Self::javelin(),
             (Self::Rook(_), Self::Arrow) => Self::minister(),
             (Self::Arrow, Self::Rook(_)) => Self::minister(),
-            (Self::Pike, Self::Pike) => Self::greater_pike(),
-            (Self::Lance, Self::Pike) => Self::sword(),
-            (Self::Pike, Self::Lance) => Self::sword(),
-            (Self::Sword, Self::Sword) => Self::longsword(),
+            (Self::Pike(_), Self::Pike(_)) => Self::greater_pike(),
+            (Self::Lance(_), Self::Pike(_)) => Self::sword(),
+            (Self::Pike(_), Self::Lance(_)) => Self::sword(),
+            (Self::Sword(_), Self::Sword(_)) => Self::longsword(),
             (Self::GreaterLance, Self::GreaterPike) => Self::longsword(),
             (Self::GreaterPike, Self::GreaterLance) => Self::longsword(),
             _ => pieces.0,
