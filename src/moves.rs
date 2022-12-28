@@ -7,7 +7,7 @@ use crate::{
 #[derive(Debug, Clone, Copy, PartialEq)]
 pub struct Position(pub u8, pub u8);
 
-pub type MoveConfig = (Position, Position, Board);
+pub type MoveConfig<'a> = (Position, Position, &'a Board);
 
 pub enum PossibleMoves {
     Move {
@@ -29,7 +29,7 @@ pub enum PossibleMoves {
     },
 }
 
-impl TryFrom<MoveConfig> for PossibleMoves {
+impl<'a> TryFrom<MoveConfig<'a>> for PossibleMoves {
     type Error = &'static str;
 
     fn try_from((starting, ending, board): MoveConfig) -> Result<Self, Self::Error> {
@@ -42,21 +42,22 @@ impl TryFrom<MoveConfig> for PossibleMoves {
         }
 
         // NOTE: These unwraps are fine because these cases have been already handled upstream
-        if let Some(_) = board.player_color(ending) {
-            Ok(Self::Move {
-                piece: PlayerPiece::get(starting, board).unwrap(),
-                starting,
-                ending,
-                captured: None,
-            })
-        } else {
-            Ok(Self::Move {
-                piece: PlayerPiece::get(starting, board).unwrap(),
-                starting,
-                ending,
-                captured: Some(board.player_piece(ending).unwrap()),
-            })
-        }
+        let piece = PlayerPiece::get(starting, board).unwrap();
+
+        let captured = match board.player_color(ending) {
+            Some(_) => None,
+            None => {
+                let captured = board.player_piece(ending).unwrap();
+                Some(captured)
+            }
+        };
+
+        Ok(Self::Move {
+            piece,
+            starting,
+            ending,
+            captured,
+        })
     }
 }
 

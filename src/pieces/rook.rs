@@ -25,7 +25,7 @@ impl Moves for Rook {
         // upwards
         for c in (col + 1)..12 {
             let new_pos = Position(row, c);
-            match PossibleMoves::try_from((pos, Position(row, c), board)) {
+            match PossibleMoves::try_from((pos, Position(row, c), &board)) {
                 Ok(x) => valid_moves.push(x),
                 Err(_) => break,
             }
@@ -34,15 +34,16 @@ impl Moves for Rook {
         // downwards
         for c in 0..col {
             let new_pos = Position(row, c);
-            match PossibleMoves::try_from((pos, Position(row, c), board)) {
+            match PossibleMoves::try_from((pos, Position(row, c), &board)) {
                 Ok(x) => valid_moves.push(x),
                 Err(_) => break,
             }
         }
+
         // left
         for r in 0..row {
             let new_pos = Position(r, col);
-            match PossibleMoves::try_from((pos, Position(r, col), board)) {
+            match PossibleMoves::try_from((pos, Position(r, col), &board)) {
                 Ok(x) => valid_moves.push(x),
                 Err(_) => break,
             }
@@ -51,7 +52,7 @@ impl Moves for Rook {
         // right
         for r in (row + 1)..12 {
             let new_pos = Position(r, col);
-            match PossibleMoves::try_from((pos, Position(r, col), board)) {
+            match PossibleMoves::try_from((pos, Position(r, col), &board)) {
                 Ok(x) => valid_moves.push(x),
                 Err(_) => break,
             }

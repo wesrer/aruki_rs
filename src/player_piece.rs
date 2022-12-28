@@ -15,7 +15,7 @@ impl PlayerPiece {
         Self { player, piece_type }
     }
 
-    pub fn get(pos: Position, board: Board) -> Option<Self> {
+    pub fn get(pos: Position, board: &Board) -> Option<Self> {
         let piece_type = board.player_piece(pos)?;
         let player = board.player_color(pos)?;
 

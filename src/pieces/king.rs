@@ -36,7 +36,7 @@ impl Moves for King {
             .filter(|pos| Board::within_board(*pos))
             .filter(|pos| board.player_color(**pos) != board.player_color(**pos))
             .map(|pos| {
-                let move_config = (Position(row, col), *pos, board);
+                let move_config = (Position(row, col), *pos, &board);
                 PossibleMoves::try_from(move_config).unwrap() // This is fine because this unwrap should never trigger
             })
             .collect();

@@ -4,7 +4,8 @@ use crate::{
     moves::{Position, PossibleMoves},
     pieces::{javelin::Javelin, king::King, pawn::Pawn, rook::Rook},
     player::Player,
-    COL_CHARS, player_piece::PlayerPiece,
+    player_piece::PlayerPiece,
+    COL_CHARS,
 };
 
 impl Display for Player {
