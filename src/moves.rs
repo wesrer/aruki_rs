@@ -1,9 +1,15 @@
-use crate::{pieces::pieces::Pieces, player_piece::PlayerPiece};
+use crate::{
+    board::{Board, GameState},
+    pieces::pieces::Pieces,
+    player_piece::PlayerPiece,
+};
 
 #[derive(Debug, Clone, Copy, PartialEq)]
 pub struct Position(pub u8, pub u8);
 
-pub enum Moves {
+pub type MoveConfig = (Position, Position, Board);
+
+pub enum PossibleMoves {
     Move {
         piece: PlayerPiece,
         starting: Position,
@@ -21,6 +27,37 @@ pub enum Moves {
         ally_piece: Pieces,
         ending_piece: Pieces,
     },
+}
+
+impl TryFrom<MoveConfig> for PossibleMoves {
+    type Error = &'static str;
+
+    fn try_from((starting, ending, board): MoveConfig) -> Result<Self, Self::Error> {
+        if let None = board.player_color(starting) {
+            return Err("Invalid starting position");
+        }
+
+        if board.player_color(starting) == board.player_color(ending) {
+            return Err("Invalid move");
+        }
+
+        // NOTE: These unwraps are fine because these cases have been already handled upstream
+        if let Some(_) = board.player_color(ending) {
+            Ok(Self::Move {
+                piece: PlayerPiece::get(starting, board).unwrap(),
+                starting,
+                ending,
+                captured: None,
+            })
+        } else {
+            Ok(Self::Move {
+                piece: PlayerPiece::get(starting, board).unwrap(),
+                starting,
+                ending,
+                captured: Some(board.player_piece(ending).unwrap()),
+            })
+        }
+    }
 }
 
 // impl Moves {

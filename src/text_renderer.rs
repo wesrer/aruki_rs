@@ -1,10 +1,10 @@
-use std::fmt::{write, Display, Formatter, Result as FmtResult};
+use std::fmt::{Display, Formatter, Result as FmtResult};
 
 use crate::{
-    moves::{Moves, Position},
-    pieces::{javelin::Javelin, king::King, pawn::Pawn},
+    moves::{Position, PossibleMoves},
+    pieces::{javelin::Javelin, king::King, pawn::Pawn, rook::Rook},
     player::Player,
-    COL_CHARS,
+    COL_CHARS, player_piece::PlayerPiece,
 };
 
 impl Display for Player {
@@ -14,6 +14,12 @@ impl Display for Player {
             Self::Black => 'B',
         };
         write!(f, "{}", letter)
+    }
+}
+
+impl Display for PlayerPiece {
+    fn fmt(&self, f: &mut Formatter) -> FmtResult {
+        write!(f, "{}_{}", self.player, self.piece_type)
     }
 }
 
@@ -28,7 +34,7 @@ impl Display for Position {
     }
 }
 
-impl Display for Moves {
+impl Display for PossibleMoves {
     fn fmt(&self, f: &mut Formatter<'_>) -> FmtResult {
         match self {
             Self::Move {
@@ -68,6 +74,12 @@ impl Display for King {
 impl Display for Javelin {
     fn fmt(&self, f: &mut Formatter) -> FmtResult {
         write!(f, "J")
+    }
+}
+
+impl Display for Rook {
+    fn fmt(&self, f: &mut Formatter) -> FmtResult {
+        write!(f, "R")
     }
 }
 

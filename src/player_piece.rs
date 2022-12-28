@@ -1,7 +1,9 @@
-use crate::{pieces::pieces::Pieces, player::Player};
-
-use std::fmt::{Display, Formatter, Result as FmtResult};
-
+use crate::{
+    board::{Board, GameState},
+    moves::Position,
+    pieces::pieces::Pieces,
+    player::Player,
+};
 #[derive(Clone, Copy)]
 pub struct PlayerPiece {
     pub player: Player,
@@ -12,10 +14,11 @@ impl PlayerPiece {
     pub fn new(player: Player, piece_type: Pieces) -> Self {
         Self { player, piece_type }
     }
-}
 
-impl Display for PlayerPiece {
-    fn fmt(&self, f: &mut Formatter) -> FmtResult {
-        write!(f, "{}_{}", self.player, self.piece_type)
+    pub fn get(pos: Position, board: Board) -> Option<Self> {
+        let piece_type = board.player_piece(pos)?;
+        let player = board.player_color(pos)?;
+
+        Some(Self::new(player, piece_type))
     }
 }

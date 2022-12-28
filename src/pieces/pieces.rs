@@ -2,7 +2,7 @@ use std::fmt::Display;
 
 use enum_display_derive::Display;
 
-use super::{javelin::Javelin, king::King, minister::Minister, pawn::Pawn};
+use super::{javelin::Javelin, king::King, minister::Minister, pawn::Pawn, rook::Rook};
 
 #[derive(Display, Clone, Copy, PartialEq)]
 pub enum Pieces {
@@ -20,7 +20,7 @@ pub enum Pieces {
     LongSword,
     Pawn(Pawn),
     Javelin(Javelin),
-    Rook,
+    Rook(Rook),
 }
 
 impl Pieces {
@@ -47,7 +47,7 @@ impl Pieces {
     }
 
     pub fn rook() -> Self {
-        Self::Rook
+        Self::Rook(Rook {})
     }
 
     pub fn pike() -> Self {
@@ -78,8 +78,8 @@ impl Pieces {
     pub fn evolve(pieces: (Self, Self)) -> Self {
         match pieces {
             (Self::Pawn(_), Self::Pawn(_)) => Self::javelin(),
-            (Self::Rook, Self::Arrow) => Self::minister(),
-            (Self::Arrow, Self::Rook) => Self::minister(),
+            (Self::Rook(_), Self::Arrow) => Self::minister(),
+            (Self::Arrow, Self::Rook(_)) => Self::minister(),
             (Self::Pike, Self::Pike) => Self::greater_pike(),
             (Self::Lance, Self::Pike) => Self::sword(),
             (Self::Pike, Self::Lance) => Self::sword(),

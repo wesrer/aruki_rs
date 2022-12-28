@@ -1,6 +1,6 @@
 use crate::{
     board::{Board, GameState},
-    moves::Position,
+    moves::{Position, PossibleMoves},
 };
 
 use super::{pieces::Pieces, Moves};
@@ -10,18 +10,28 @@ pub struct Pawn {}
 
 // TODO: promotions
 impl Moves for Pawn {
-    fn moves(pos: Position, board: Board) -> Vec<Position> {
+    fn moves(pos: Position, board: Board) -> Vec<PossibleMoves> {
         match board.player_piece(pos) {
             Some(Pieces::Pawn(_)) => {}
             _ => return vec![],
         }
 
+        let row = pos.0;
+        let col = pos.1;
+
         let mut valid_moves = vec![
-            Position(pos.0 + 1, pos.1), // one forward
+            Position(row + 1, col), // one forward
         ];
 
-        valid_moves.retain(Board::within_board);
-        valid_moves.retain(|x| board.player_color(*x) != board.player_color(pos));
+        let valid_moves = valid_moves
+            .iter()
+            .filter(|pos| Board::within_board(*pos))
+            .filter(|pos| board.player_color(**pos) != board.player_color(**pos))
+            .map(|pos| {
+                let move_config = (Position(row, col), *pos, board);
+                PossibleMoves::try_from(move_config).unwrap() // This is fine because this unwrap should never trigger
+            })
+            .collect();
 
         valid_moves
     }
