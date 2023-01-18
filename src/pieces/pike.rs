@@ -1,15 +1,15 @@
 use crate::{
-    board::{Board, GameState},
-    moves::{Position, PossibleMoves},
+    board::{Board, BoardState},
+    moves::{Move, Position},
 };
 
-use super::{pieces::Pieces, Moves};
+use super::{pieces::Pieces, PieceProperties};
 
 #[derive(Clone, Copy, PartialEq)]
 pub struct Pike {}
 
-impl Moves for Pike {
-    fn moves(pos: Position, board: &Board) -> Vec<PossibleMoves> {
+impl PieceProperties for Pike {
+    fn moves(pos: Position, board: &Board) -> Vec<Move> {
         match board.player_piece(pos) {
             Some(Pieces::Pike(_)) => {}
             _ => return vec![],
@@ -31,7 +31,7 @@ impl Moves for Pike {
             .filter(|pos| board.player_color(**pos) != board.player_color(**pos))
             .map(|pos| {
                 let move_config = (Position(row, col), *pos, board);
-                PossibleMoves::try_from(move_config).unwrap() // This is fine because this unwrap should never trigger
+                Move::try_from(move_config).unwrap() // This is fine because this unwrap should never trigger
             })
             .collect();
 

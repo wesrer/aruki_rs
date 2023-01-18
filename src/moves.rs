@@ -1,5 +1,5 @@
 use crate::{
-    board::{Board, GameState},
+    board::{Board, BoardState},
     pieces::pieces::Pieces,
     player_piece::PlayerPiece,
 };
@@ -9,8 +9,8 @@ pub struct Position(pub u8, pub u8);
 
 pub type MoveConfig<'a> = (Position, Position, &'a Board);
 
-pub enum PossibleMoves {
-    Move {
+pub enum Move {
+    MovePiece {
         piece: PlayerPiece,
         starting: Position,
         ending: Position,
@@ -29,7 +29,7 @@ pub enum PossibleMoves {
     },
 }
 
-impl<'a> TryFrom<MoveConfig<'a>> for PossibleMoves {
+impl<'a> TryFrom<MoveConfig<'a>> for Move {
     type Error = &'static str;
 
     fn try_from((starting, ending, board): MoveConfig) -> Result<Self, Self::Error> {
@@ -52,7 +52,7 @@ impl<'a> TryFrom<MoveConfig<'a>> for PossibleMoves {
             }
         };
 
-        Ok(Self::Move {
+        Ok(Self::MovePiece {
             piece,
             starting,
             ending,

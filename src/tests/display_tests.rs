@@ -1,5 +1,5 @@
 use crate::{
-    moves::{Position, PossibleMoves},
+    moves::{Move, Position},
     pieces::pieces::Pieces,
     player_piece::PlayerPiece,
 };
@@ -25,7 +25,7 @@ fn test_minister() {
 #[test]
 fn test_render_normal_move() {
     let king_piece = PlayerPiece::new('w'.try_into().unwrap(), "k".try_into().unwrap());
-    let king_move = PossibleMoves::Move {
+    let king_move = Move::MovePiece {
         piece: king_piece,
         starting: Position(10, 0),
         ending: Position(11, 0),
@@ -38,7 +38,7 @@ fn test_render_normal_move() {
 #[test]
 fn test_render_capture_move() {
     let king_piece = PlayerPiece::new('w'.try_into().unwrap(), "k".try_into().unwrap());
-    let king_move = PossibleMoves::Move {
+    let king_move = Move::MovePiece {
         piece: king_piece,
         starting: Position(0, 0),
         ending: Position(1, 0),
@@ -51,7 +51,7 @@ fn test_render_capture_move() {
 #[test]
 fn test_render_evolution_move() {
     let pawn_piece = PlayerPiece::new('w'.try_into().unwrap(), "o".try_into().unwrap());
-    let pawn_evolve = PossibleMoves::Evolution {
+    let pawn_evolve = Move::Evolution {
         piece: pawn_piece,
         starting: Position(1, 0),
         ally_piece: Pieces::pawn(),

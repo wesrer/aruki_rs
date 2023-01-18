@@ -11,12 +11,12 @@ use super::{
 pub enum Pieces {
     King(King),
     Minister(Minister),
-    // Jester,
+    Jester,
     Arrow,
     Lance(Lance),
     GreaterLance,
-    // GreaterRiver,
-    // LesserRiver,
+    GoldenDragon,
+    SilverDragon,
     Pike(Pike),
     GreaterPike,
     Sword(Sword),
@@ -77,6 +77,18 @@ impl Pieces {
         Self::LongSword
     }
 
+    pub fn golden_dragon() -> Self {
+        Self::GoldenDragon
+    }
+
+    pub fn silver_dragon() -> Self{
+        Self::SilverDragon
+    }
+
+    pub fn jester() -> Self {
+        Self::Jester
+    }
+
     // NOTE: returns the first piece if no evolution is viable
     pub fn evolve(pieces: (Self, Self)) -> Self {
         match pieces {
@@ -86,6 +98,7 @@ impl Pieces {
             (Self::Pike(_), Self::Pike(_)) => Self::greater_pike(),
             (Self::Lance(_), Self::Pike(_)) => Self::sword(),
             (Self::Pike(_), Self::Lance(_)) => Self::sword(),
+
             (Self::Sword(_), Self::Sword(_)) => Self::longsword(),
             (Self::GreaterLance, Self::GreaterPike) => Self::longsword(),
             (Self::GreaterPike, Self::GreaterLance) => Self::longsword(),

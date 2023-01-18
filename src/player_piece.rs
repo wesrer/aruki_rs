@@ -1,5 +1,5 @@
 use crate::{
-    board::{Board, GameState},
+    board::{Board, BoardState},
     moves::Position,
     pieces::pieces::Pieces,
     player::Player,

@@ -1,16 +1,16 @@
 use crate::{
-    board::{Board, GameState},
-    moves::{Position, PossibleMoves},
+    board::{Board, BoardState},
+    moves::{Move, Position},
 };
 
-use super::Moves;
+use super::PieceProperties;
 
 #[derive(Clone, Copy, PartialEq)]
 pub struct Lance {}
 
 // Needs to care about which piece is beside which
-impl Moves for Lance {
-    fn moves(pos: Position, board: &Board) -> Vec<PossibleMoves> {
+impl PieceProperties for Lance {
+    fn moves(pos: Position, board: &Board) -> Vec<Move> {
         // cannot have guard clauses since many other pieces are expected to
         // reuse this moveset (King, Sword, GreaterLance, LongSword)
 
@@ -30,7 +30,7 @@ impl Moves for Lance {
             .filter(|pos| board.player_color(**pos) != board.player_color(**pos))
             .map(|pos| {
                 let move_config = (Position(row, col), *pos, board);
-                PossibleMoves::try_from(move_config).unwrap() // This is fine because this unwrap should never trigger
+                Move::try_from(move_config).unwrap() // This is fine because this unwrap should never trigger
             })
             .collect();
 

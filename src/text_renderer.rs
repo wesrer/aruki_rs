@@ -1,7 +1,7 @@
 use std::fmt::{Display, Formatter, Result as FmtResult};
 
 use crate::{
-    moves::{Position, PossibleMoves},
+    moves::{Move, Position},
     pieces::{
         javelin::Javelin, king::King, lance::Lance, pawn::Pawn, pike::Pike, rook::Rook,
         sword::Sword,
@@ -38,10 +38,10 @@ impl Display for Position {
     }
 }
 
-impl Display for PossibleMoves {
+impl Display for Move {
     fn fmt(&self, f: &mut Formatter<'_>) -> FmtResult {
         match self {
-            Self::Move {
+            Self::MovePiece {
                 piece,
                 starting,
                 ending,

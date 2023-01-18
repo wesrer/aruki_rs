@@ -1,4 +1,5 @@
 mod board;
+mod errors;
 mod game;
 mod moves;
 mod pieces;
