@@ -18,12 +18,26 @@ impl PieceProperties for Pawn {
 
         let row = pos.0;
         let col = pos.1;
-        let move_config = (pos, Position(row + 1, col), board);
+ 
+        let mut moves = vec![];
 
+        let move_config = (pos, Position(row + 1, col), board);
         if let Ok(x) = Move::try_from(move_config) {
-            return vec![x];
-        } else {
-            return vec![];
+            moves.push(x)
         }
+
+        if let Some(x) = board.live_board[(row + 1) as usize][(col + 1) as usize]{
+            if Some(x.player) != board.player_color(pos) {
+                moves.push((pos, Position(row +1, col + 1), board).try_into().unwrap());
+            }
+        }
+
+        if let Some(x) = board.live_board[(row + 1) as usize][(col - 1) as usize]{
+            if Some(x.player) != board.player_color(pos) {
+                moves.push((pos, Position(row +1, col + 1), board).try_into().unwrap());
+            }
+        }
+        
+        moves
     }
 }
