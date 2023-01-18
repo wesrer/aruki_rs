@@ -1,7 +1,7 @@
 # Aruki
 
 Aruki is a chess like game inspired by many chess variants. 
-It was designed to be harder for both humans and computers to play than chess, and thus brute force algorithms should not be viable solutions for a game engine.
+It was designed to be harder to play for both humans and computers than chess, with the motivation being that engines would have to rely on machine learning algorithms rather than brute force ones to be viable.
 
 ## Goal
 
@@ -50,9 +50,9 @@ The following pieces go into Buffer Trays:
 
 The following pieces do NOT go into the Buffer Trays:
 
-1. Jester
-2. Golden Dragon
-3. Silver Dragon
+1. Jesters
+2. Golden Dragons
+3. Silver Dragons
 
 ## Promotions
 
