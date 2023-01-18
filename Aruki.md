@@ -5,7 +5,7 @@ It was designed to be harder to play for both humans and computers than chess, w
 
 ## Goal
 
-The Goal of the game is to checkmate your opponent's king, just like in chess (i.e. there should be no legal move left for the opponent where is relived of a check).
+The Goal of the game is to checkmate your opponent's king, just like in chess (i.e. there should be no legal move left for the opponent where he can be relived of a check).
 
 ## Board
 
@@ -56,7 +56,7 @@ The following pieces do NOT go into the Buffer Trays:
 
 ## Promotions
 
-Any pawn or javelin that enters the pawn row of the opponent, i.e. the second to last row on the board viewed from the player's perspective can be promoted into a piece that is the Buffer Tray. Promotions cannot happen if there are no leftover pieces in the Buffer tray. Javelins cannot be promoted to pawns, however, even if there are pawns on the Buffer Tray.
+Any pawn or javelin that enters the pawn row of the opponent, i.e. the second to last row on the board viewed from the player's perspective can be promoted into a piece that is the Buffer Tray. Promotions cannot happen if there are no leftover pieces in the Buffer tray. Javelins cannot be promoted to pawns, however, even if there are pawns on the Buffer Tray. Pawns that are used for promotions do not go into any of the players buffer tray. 
 
 ## Evolution
 
@@ -149,8 +149,35 @@ Therefore, the Golden dragon can check an opponent king across a column regardle
 The Silver Dragon is basically the same as the Golden Dragon except it can wipe out a row instead of a column. All other properties carry over.
 
 
+## Notation
 
+Aruki has a robust english notation for recording games.
 
+- The rows are represented using lowercase letters `a` - `l`
+- The columns are represented using the numbers 1 - 12
+- Moves that are just pieces changing squares are represented like `O(a4)a5` where `O` is the symbol of the piece, `a4` is the starting square and `a5` is the ending square
+- Checks are represented using a `+` sign added to the end - `M(d5)d7+`
+- Check mates are represented using a `#` sign added to the end - `M(d5)d7#`
+- Evolutions are represented like so - `O(a6)+O=J` where the `O` is the piece in the board being evolved, `a6` is the current square of the piece, the second `O` is the piece from the buffer tray being used and `J` is the resulting evolution
+- Promotions are represented as such - `O(a10)a11=R` where `O(a10)a11` is the notation for the regular movement of the pawn, and `R` is the piece from the buffer tray that the piece is being promoted to.
+- A Golden Dragon eliminating a column is represented as `GD(c4)-` where `GD` is the symbol for the golden dragon, and `c4` is where it currently is
+- A Silver Dragon eliminating a row is represented as `SD(c4)-` where `SD` is the symbol for the silver dragon, and `c4` is where it currently is
 
+### Piece Symbols
 
+- Pawn - `O`
+- Javelin - `J`
+- Pike - `P`
+- Greater Pike - `PP`
+- Lance -  `L`
+- Greater Lance -  `LL`
+- Sword - `S`
+- Long Sword - `SS`
+- Rook - `R`
+- Arrow - `A`
+- Minister - `M`
+- King - `K`
+- Jester - `JK`
+- Golden Dragon - `GD`
+- Silver Dragon - `SD`
 
