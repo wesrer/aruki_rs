@@ -80,9 +80,8 @@ Pawns move one square in the forward direction, and attack the squares to the ri
 
 ### Javelin
 
-A Javelin can move one or two squares forward.
+A Javelin can move one forward and one square backward.
 It can still attack both the diagonal squares that it could as if it were a pawn.
-On top of that, it can now attack the square directly in front of it.
 A Javelin evolves from combining two pawns.
 
 ### King
