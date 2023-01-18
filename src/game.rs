@@ -1,8 +1,8 @@
 use std::fs::read_to_string;
 use std::path::Path;
 
-use crate::board::Board;
 use crate::board::setup::BoardSetup;
+use crate::board::Board;
 use crate::errors::GameError;
 use crate::moves::Move;
 use crate::player::Player;
@@ -29,9 +29,7 @@ impl Game {
     pub fn get_final_state(&self) -> Board {
         let mut board = Board::starting_pos();
 
-        for m in &self.history {
-            
-        }
+        for m in &self.history {}
         board
     }
 }

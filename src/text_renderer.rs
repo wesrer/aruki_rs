@@ -3,8 +3,8 @@ use std::fmt::{Display, Formatter, Result as FmtResult};
 use crate::{
     moves::{Move, Position},
     pieces::{
-        javelin::Javelin, king::King, lance::Lance, pawn::Pawn, pike::Pike, rook::Rook,
-        sword::Sword,
+        arrow::Arrow, javelin::Javelin, king::King, lance::Lance, pawn::Pawn, pike::Pike,
+        rook::Rook, sword::Sword,
     },
     player::Player,
     player_piece::PlayerPiece,
@@ -78,6 +78,12 @@ impl Display for King {
 impl Display for Javelin {
     fn fmt(&self, f: &mut Formatter) -> FmtResult {
         write!(f, "J")
+    }
+}
+
+impl Display for Arrow {
+    fn fmt(&self, f: &mut Formatter) -> FmtResult {
+        write!(f, "A")
     }
 }
 

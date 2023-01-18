@@ -62,25 +62,25 @@ impl BoardSetup for Board {
         let b_arrow = PlayerPiece::new(Player::Black, Pieces::arrow());
         let b_arrow2 = b_arrow.clone();
 
-        let w_lance= PlayerPiece::new(Player::White, Pieces::lance());
+        let w_lance = PlayerPiece::new(Player::White, Pieces::lance());
         let w_lance2 = w_lance.clone();
         let b_lance = PlayerPiece::new(Player::Black, Pieces::lance());
-        let b_lance2= b_lance.clone();
+        let b_lance2 = b_lance.clone();
 
-        let w_pike= PlayerPiece::new(Player::White, Pieces::pike());
-        let w_pike2= w_pike.clone();
+        let w_pike = PlayerPiece::new(Player::White, Pieces::pike());
+        let w_pike2 = w_pike.clone();
         let b_pike = PlayerPiece::new(Player::Black, Pieces::pike());
-        let b_pike2= b_lance.clone();
+        let b_pike2 = b_lance.clone();
 
         let w_golden_dragon = PlayerPiece::new(Player::White, Pieces::golden_dragon());
         let b_golden_dragon = PlayerPiece::new(Player::Black, Pieces::golden_dragon());
 
         let w_silver_dragon = PlayerPiece::new(Player::White, Pieces::silver_dragon());
         let b_silver_dragon = PlayerPiece::new(Player::Black, Pieces::silver_dragon());
-       
+
         let w_jester = PlayerPiece::new(Player::White, Pieces::jester());
         let b_jester = PlayerPiece::new(Player::Black, Pieces::jester());
-        
+
         board.live_board[0][0] = Some(w_rook);
         board.live_board[0][1] = Some(w_arrow);
         board.live_board[0][2] = Some(w_lance);
@@ -117,4 +117,4 @@ impl BoardSetup for Board {
 
         board
     }
-    }
+}

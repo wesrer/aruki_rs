@@ -1,9 +1,6 @@
 pub mod setup;
 
-use crate::{
-    moves::Position, pieces::pieces::Pieces, player::Player,
-    player_piece::PlayerPiece,
-};
+use crate::{moves::Position, pieces::pieces::Pieces, player::Player, player_piece::PlayerPiece};
 
 pub type Square = Option<PlayerPiece>;
 

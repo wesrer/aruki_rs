@@ -3,6 +3,7 @@ use crate::{
     moves::{Move, Position},
 };
 
+pub mod arrow;
 pub mod javelin;
 pub mod king;
 pub mod lance;

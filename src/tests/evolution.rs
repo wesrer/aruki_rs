@@ -1,4 +1,8 @@
-use crate::{board::{Board, setup::BoardSetup}, moves::Position, player_piece::PlayerPiece};
+use crate::{
+    board::{setup::BoardSetup, Board},
+    moves::Position,
+    player_piece::PlayerPiece,
+};
 
 #[test]
 pub fn test_pawn_evolution() {
